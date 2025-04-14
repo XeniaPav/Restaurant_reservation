@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -16,3 +18,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    environment:
+      DATABASE_URL: postgresql://user:password@db/restaurant_db
+    volumes:
+      - .:/app
+
+  volumes:
+    postgres_data:

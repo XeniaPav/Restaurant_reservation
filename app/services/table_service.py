@@ -3,27 +3,27 @@ from sqlalchemy.future import select
 from app.models.table import Table as TableModel
 from app.schemas.table import TableCreate
 
+
 async def create_table(db: AsyncSession, table_create: TableCreate):
     db_table = TableModel(
-        name=table_create.name,
-        seats=table_create.seats,
-        location=table_create.location
+        name=table_create.name, seats=table_create.seats, location=table_create.location
     )
     db.add(db_table)
-    await db.commit()  # Асинхронный коммит
-    await db.refresh(db_table)  # Асинхронное обновление
+    await db.commit()
+    await db.refresh(db_table)
     return db_table
 
+
 async def get_tables(db: AsyncSession):
-    result = await db.execute(select(TableModel))  # Асинхронный запрос
-    return result.scalars().all()  # Получаем все результаты
+    result = await db.execute(select(TableModel))
+    return result.scalars().all()
+
 
 async def delete_table(db: AsyncSession, table_id: int):
     result = await db.execute(select(TableModel).filter(TableModel.id == table_id))
-    table = result.scalar_one_or_none()  # Получаем таблицу или None
-
+    table = result.scalar_one_or_none()
     if table:
-        await db.delete(table)  # Удаляем таблицу
-        await db.commit()  # Коммитим изменения
+        await db.delete(table)
+        await db.commit()
         return True
-    return False  # Если таблица не найдена, возвращаем False
+    return False

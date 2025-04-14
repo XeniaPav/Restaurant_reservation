@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from app.models.table import Base
 
+
 class Reservation(Base):
     """Модель брони"""
 
