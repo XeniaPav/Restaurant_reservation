@@ -6,9 +6,13 @@ Restaurant reservation - API-сервис бронирования столик�
 
 ### Стек технологий
 FastAPI 
+
 SQLAlchemy 
+
 PostgreSQL
+
 Alembic 
+
 Docker
 
 ### Функционал
